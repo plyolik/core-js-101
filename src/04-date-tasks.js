@@ -19,8 +19,8 @@
  *    'Tue, 26 Jan 2016 13:48:02 GMT' => Date()
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
-function parseDataFromRfc2822(/* value */) {
-  throw new Error('Not implemented');
+function parseDataFromRfc2822(value) {
+  return new Date(value);
 }
 
 /**
@@ -34,8 +34,8 @@ function parseDataFromRfc2822(/* value */) {
  *    '2016-01-19T16:07:37+00:00'    => Date()
  *    '2016-01-19T08:07:37Z' => Date()
  */
-function parseDataFromIso8601(/* value */) {
-  throw new Error('Not implemented');
+function parseDataFromIso8601(value) {
+  return Date.parse(value);
 }
 
 
@@ -53,8 +53,15 @@ function parseDataFromIso8601(/* value */) {
  *    Date(2012,1,1)    => true
  *    Date(2015,1,1)    => false
  */
-function isLeapYear(/* date */) {
-  throw new Error('Not implemented');
+function isLeapYear(date) {
+  const year = date.getFullYear();
+  if (year % 4 !== 0) {
+    return false;
+  }
+  if (year % 400 === 0) {
+    return true;
+  }
+  return year % 100 !== 0;
 }
 
 
@@ -73,8 +80,27 @@ function isLeapYear(/* date */) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,10,0,0,250)     => "00:00:00.250"
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
-function timeSpanToString(/* startDate, endDate */) {
-  throw new Error('Not implemented');
+function timeSpanToString(startDate, endDate) {
+  function addZero(num) {
+    return num > 9 ? num : `0${num}`;
+  }
+
+  function addMillsZero(num) {
+    if (num < 10) {
+      return `00${num}`;
+    }
+    if (num < 100) {
+      return `0${num}`;
+    }
+    return num;
+  }
+
+  const hours = endDate.getHours() - startDate.getHours();
+  const mins = endDate.getMinutes() - startDate.getMinutes();
+  const secs = endDate.getSeconds() - startDate.getSeconds();
+  const mills = endDate.getMilliseconds() - startDate.getMilliseconds();
+
+  return `${addZero(hours)}:${addZero(mins)}:${addZero(secs)}.${addMillsZero(mills)}`;
 }
 
 

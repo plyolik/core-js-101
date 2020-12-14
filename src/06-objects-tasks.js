@@ -20,8 +20,36 @@
  *    console.log(r.height);      // => 20
  *    console.log(r.getArea());   // => 200
  */
-function Rectangle(/* width, height */) {
-  throw new Error('Not implemented');
+function Rectangle(width, height) {
+  // return {
+  //   height,
+  //   width,
+  //   getArea() {
+  //     return this.width * this.height;
+  //   },
+  // };
+
+  class Objj {
+    constructor(w, h) {
+      this.width = w;
+      this.height = h;
+    }
+
+    getArea() {
+      return this.width * this.height;
+    }
+  }
+
+  return new Objj(width, height);
+
+  // function Obj(w, h) {
+  //   this.width = w;
+  //   this.height = h;
+
+  //   this.getArea = () => this.width * this.height;
+  // }
+
+  // return new Obj(width, height);
 }
 
 
@@ -35,8 +63,8 @@ function Rectangle(/* width, height */) {
  *    [1,2,3]   =>  '[1,2,3]'
  *    { width: 10, height : 20 } => '{"height":10,"width":20}'
  */
-function getJSON(/* obj */) {
-  throw new Error('Not implemented');
+function getJSON(obj) {
+  return JSON.stringify(obj);
 }
 
 
@@ -109,6 +137,58 @@ function fromJSON(/* proto, json */) {
  *
  *  For more examples see unit tests.
  */
+
+// const addrBuilder = {
+//   _country: null,
+//   _city: [],
+//   _street: [],
+//   _builders: [],
+//   _combinator: [],
+
+//   country(value) {
+//     this._country = value;
+//     return this;
+//   },
+
+//   city(value) {
+//     this._city.push(value);
+//     return this;
+//   },
+
+//   street(value) {
+//     this._street.push(value);
+//     return this;
+//   },
+
+//   build() {
+//     let res = ''
+//     if (this._builders.length > 0) {
+//       res += this._builders.map(b => b.build()).join(this._combinator);
+//       return res;
+//     }
+//     if (this._country) {
+//       res += 'Country: ' + this._country + '; ';
+//     }
+//     if (this._city.length > 0) {
+//       res += 'Cities: ';
+//       res += this._city.join(', ');
+//       res += '; '
+//     }
+//     if (this._street.length > 0) {
+//       res += 'Streets: ';
+//       res += this._street.join(', ');
+//       res += ';'
+//     }
+//     return res;
+//   },
+
+//   combine(builder1, combinator, builder2) {
+//     this._builders.push(builder1);
+//     this._builders.push(builder2);
+//     this._combinator = combinator;
+//     return this;
+//   }
+// }
 
 const cssSelectorBuilder = {
   element(/* value */) {
